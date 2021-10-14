@@ -1,0 +1,33 @@
+version: '3'
+services:
+  moitrack-api:
+      image: moitrack/tracking-api
+      ports:
+      - "8085:8085"
+      depends_on:
+      - db
+      environment:
+      - spring.data.mongodb.uri=mongodb://db/moiponeGateKeeper
+      - SERVICE_PORTS=8085
+      - EMAIL_LIST=nguni52@moiponetech.co.za,mosa@moiponetech.co.za,mogokong@moiponefleet.co.za
+      - MOIFLEET_API_LINK=https://dev-api.moifleet.co.za/api/moipone-fleet/tracking/vehicles
+      restart: "always"
+      networks:
+      - web
+      deploy:
+        mode: replicated
+        replicas: 5
+        update_config:
+          parallelism: 2
+          delay: 10s
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+        placement:
+          constraints: [node.role == worker]
+
+networks:
+  web:
+    external: true

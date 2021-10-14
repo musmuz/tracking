@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+Good day, <br/><br/>
+
+In the past 24 hours, the following Moitrack fitted vehicles updated records:<br/><br/>
+
+Total number of vehicles: <span th:text="${vehicleSize}"></span><br/>
+Total number of vehicles that updated records: <span th:text="${numberOfUnits}"></span><br/>
+Total number of vehicles that did not update records: <span th:text="${diff}"></span><br/><br/>
+
+Vehicles that did not update records:
+<ul>
+    <li th:each="vehicle: ${nonRecordingVehicles}" th:text="${vehicle.registrationNumber}"></li>
+</ul>
+
+Kind Regards,<br/>
+Moitrack Team
+</body>
+</html>

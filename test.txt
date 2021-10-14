@@ -1,0 +1,41 @@
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"id": "58aabeaddff8b4ed9fe07382","name": "TOYOTA ETIOS 1.5 Xs 5Dr ", "model": "ETIOS","key": "8EwnJig1J9Fya1CK3BsPv3xrdQPJNEZM"}' \
+http://localhost:8085/moitrack/api/vehicle
+
+curl -H "Content-Type:application/json" -X DELETE http://localhost:8085/moitrack/api/vehicle/58aabeaddff8b4ed9fe07382
+
+curl -H "Content-Type:application/json" -X GET http://localhost:8085/moitrack/api/vehicle/58aabeaddff8b4ed9fe07382
+
+curl -H "Content-Type:application/json" -X GET http://localhost:8085/moitrack/api/tracker/path?imei=868324022096759&dateFrom=22/05/2017&dateTo=23/05/2017
+
+curl -i -X GET http://localhost:8085/moitrack/api/tracker/path?imei=868324022096759&dateFrom=22/05/2017&dateTo=23/05/2017
+
+
+curl -i -X POST -H 'cache-control: no-cache' -H 'content-type: application/json' -d '{
+        "identityDocumentNumber": "0000000000000",
+        "dateOfBirth": "1983-10-03",
+        "name": "Nguni",
+        "surname": "Phakela",
+        "password":"matheko",
+        "email": "nguni52@moiponetech.co.za",
+        "cellphoneNumber": "0611312053",
+        "telephoneNumber": "",
+        "address": {
+            "streetAddress1": "",
+            "streetAddress2": "",
+            "city": "",
+            "province": "",
+            "postalCode": ""
+        }
+    }' http://staging.moifleet.co.za/api/individual/users
+
+
+
+curl -i -X GET 'http://localhost:8085/moitrack/api/vehicle/findby/registration?vehicles=CX14MXGP,CX14SDGP,CX14SGGP,CV66PVGP,CX14SGGP'
+
+
+## Moalosi Report Request - 25 May 2021
+db.tracker.find({"data._id": "868714044606777","data.payload.timeStamp": {$gte: ISODate("2021-05-20T08:25:03"), $lte: ISODate("2021-05-20T15:25:03")}});
+.sort({$natural: -1}).limit(2).pretty();
+db.tracker.find({"data._id": "868714044606777"}).sort({$natural: -1}).limit(2).pretty();
+db.tracker.find({"data._id": "868714044606777","data.payload.timeStamp": {$gte: ISODate("2021-05-20T08:25:03")}});

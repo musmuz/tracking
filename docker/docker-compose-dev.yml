@@ -1,0 +1,19 @@
+version: '3'
+services:
+  user:
+    image: moitrack/tracking-api
+    container_name: tracking-api
+    ports:
+      - "8085:8085"
+    external_links:
+      - mongodb
+    networks:
+      - custom
+    environment:
+      - spring.data.mongodb.uri=mongodb://moitrack_db:27017/moiponeGateKeeper
+      - SPRING_PROFILES_ACTIVE=dev
+      - EMAIL_LIST=nguni52@moiponetech.co.za,mosa@moiponetech.co.za,mogokong@moiponefleet.co.za
+      - MOIFLEET_API_LINK=https://api.moifleet.co.za/api/moipone-fleet/tracking/vehicles
+networks:
+    custom:
+      external: true
